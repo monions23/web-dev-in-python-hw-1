@@ -13,25 +13,25 @@ def timer(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
 
-        # Calculate execution time
+        # find execution time of result
         start_time = time.perf_counter()
         result = func(*args, **kwargs)
         end_time = time.perf_counter()
         execution_time = end_time - start_time
 
-        # Append n to ns for execution t ime graph
+        # append n to ns for execution t ime graph
         n = args[0]
         ns.append(n)
 
-        # Append execution_time to list for execution time graph
+        # append execution_time to list for execution time graph
         execution_times.append(execution_time)
 
-        # Build readable argument - string representations of args and kwargs
+        # build readable argument - string representations of args and kwargs
         arg_list = [str(arg) for arg in args]
         kw_list = [f"{key}={str(val)}" for key, val in kwargs.items()]
         final_argument = ", ".join(arg_list + kw_list)
 
-        # Print formatted execution time of result
+        # print formatted execution time of result
         print(
             f"Finished in {execution_time:.8f}s: {func.__name__}({final_argument}) -> {result}"
         )
@@ -45,7 +45,7 @@ def timer(func):
 def fib(n: int) -> int:
     """Default function to calculate the Fibonacci value for an Integer n"""
 
-    # Calculate the fibonacci value
+    # calculate the fibonacci value
     if n < 2:
         return n
     return fib(n - 1) + fib(n - 2)
