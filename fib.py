@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 
 execution_times = []
 ns = []
-ns_seen = set()
 
 
 def timer(func):
@@ -14,22 +13,25 @@ def timer(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
 
+        # Calculate execution time
         start_time = time.perf_counter()
         result = func(*args, **kwargs)
         end_time = time.perf_counter()
         execution_time = end_time - start_time
 
+        # Append n to ns for execution t ime graph
         n = args[0]
         ns.append(n)
 
-        execution_times.append(end_time - start_time)
+        # Append execution_time to list for execution time graph
+        execution_times.append(execution_time)
 
         # Build readable argument - string representations of args and kwargs
         arg_list = [str(arg) for arg in args]
         kw_list = [f"{key}={str(val)}" for key, val in kwargs.items()]
         final_argument = ", ".join(arg_list + kw_list)
 
-        # print formatted execution time of result
+        # Print formatted execution time of result
         print(
             f"Finished in {execution_time:.8f}s: {func.__name__}({final_argument}) -> {result}"
         )
@@ -51,5 +53,7 @@ def fib(n: int) -> int:
 
 if __name__ == "__main__":
     fib(100)
+
+    # Plot execution time line graph
     plt.plot(ns, execution_times)
     plt.show()
