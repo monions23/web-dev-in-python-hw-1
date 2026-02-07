@@ -66,6 +66,12 @@ For fib.py:
 $ python fib.py
 ```
 
+Once you are finished editing and running your code, deactivate your venv with the following terminal command:
+
+```
+$ deactivate
+```
+
 ## My Work
 
 ### Part 1: Python Programming Basics: The Echo Function
